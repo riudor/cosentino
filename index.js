@@ -116,6 +116,38 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 
 
 
+
+
+
+
+
+
+controller.on('message_received', (bot, message) => {
+
+        bot.startConversation(message, (err, convo) => {
+            convo.say('Hey! I am Deskie your cryptotrading assistant:)');
+            //bot.reply(message2,typing_on);
+            convo.say(probaaaa Cosentino);
+        });
+
+}); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let flag= true ;
 controller.on('message_received', (bot, message) => {
     //console.log(message);
