@@ -62,25 +62,30 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
-controller.hears(['hola'], 'message_received', (bot, message) => {
+controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
-        convo.say('Hola, somos instamaki.');
+        convo.say('Hello, I am Cozy your Cosentino assistant.');
         convo.say({
             attachment: {
                 'type':'template',
                 'payload':{
                     'template_type':'button',
-                    'text':'¿que podemos hacer por tí?',
+                    'text':'¿How can we help you?',
                     'buttons':[
                         {
                             'type':'postback',
-                            'title':'Ver ofertas',
-                            'payload':'ofertas'
+                            'title':'See products',
+                            'payload':'products'
                         },
                         {
                             'type':'postback',
-                            'title':'Consultar locales',
-                            'payload':'locales'
+                            'title':'My profile',
+                            'payload':'profile'
+                        },
+                        {
+                            'type':'postback',
+                            'title':'Purchase product',
+                            'payload':'purchase'
                         }
                     ]
                 }
@@ -94,7 +99,7 @@ controller.hears(['hola'], 'message_received', (bot, message) => {
     };
 });
 
-controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
+controller.hears(['products', 'product'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
             convo.ask({
@@ -158,7 +163,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                                     "quantity":1,
                                     "price":18,
                                     "currency":"EUR",
-                                    "image_url":"http://manekinekosushi.com/wp-content/uploads/2016/08/maki_29_-maki_mixto.jpg"
+                                    "image_url":"http://static.cosentino.com/dektonmulti/theme/files/images/natural-coleccion/aura-kitchen.jpg"
                                 }
                         ],
                         "address":{
