@@ -116,37 +116,6 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 
 
 
-
-
-
-
-
-
-controller.on('message_received', (bot, message) => {
-
-        bot.startConversation(message, (err, convo) => {
-            //convo.say('Probaaaaa');
-            //bot.reply(message2,typing_on);
-        });
-
-}); 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 let flag= true ;
 controller.on('message_received', (bot, message) => {
     //console.log(message);
@@ -155,7 +124,7 @@ controller.on('message_received', (bot, message) => {
         flag = false ;
         //bot.reply(message,typing_on);
         bot.startConversation(message, (err, convo) => {
-            convo.say('Hey! I am Cozy your Cosentino assistant:)');
+            convo.say('Hey! I am Deskie your cryptotrading assistant:)');
             //bot.reply(message2,typing_on);
             convo.say({
                 attachment: {
@@ -217,7 +186,7 @@ controller.hears(['more'], 'message_received', (bot, message) => {
                         'buttons':[
                         {
                             'type':'postback',
-                            'title':'My profile',
+                            'title':'Summary',
                             'payload':'summary'
                         },
                         {
@@ -227,7 +196,7 @@ controller.hears(['more'], 'message_received', (bot, message) => {
                         },
                         {
                             'type':'postback',
-                            'title':'FAQ',
+                            'title':'See a crypto',
                             'payload':'crypto'
                             }/*,
                             {
@@ -258,29 +227,47 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
             convo.say('Today it has been an incredible day!');
 
-
-                convo.say('You have cooked 2 times:');
+            request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
+              if(error){
+                convo.say('internal error ocurred:S');
+            }
+            else{
+                let json = JSON.parse(body);
+                convo.say('You have:');
                 //console.log(body[0].amount);
-                convo.say('You have cooked : 2 times');
-                convo.say('You have eaten 4K calories');
-                convo.say('Diana has liked your new recipe');
+                convo.say( json[0].amount + ' ' + json[0].currency + ' (+15%)');
+                convo.say( json[1].amount + ' ' + json[1].currency + ' (+7%)');
+                convo.say( json[2].amount + ' ' + json[2].currency + ' (-2%)');
+                convo.say( json[3].amount + ' ' + json[3].currency + ' (+11%)');
 
 
 
 
+                request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+                    let json3 = JSON.parse(body);
+                    request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
+                        let json4 = JSON.parse(body);
+                        request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
 
-
+                            let json2 = JSON.parse(body);
+                            let btc_xmr= json2.last;
+                            let btc_eth= json4.last;
+                            let btc_euro= json3.last;
+                            total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
+                            convo.say('Total worth of your portfolio: ' + total + ' EUR');
                             convo.say('Do you want to do more actions?');
                             conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
+                        });
+                    });                    
+                });
 
 
-
-            
+            }
         });
 
 
         });
-    //}
+    }
 });
 
 
