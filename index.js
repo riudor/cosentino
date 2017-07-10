@@ -127,7 +127,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                 conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
                 convo.next();
             });
-            convo.say('Muy buena elección!');
+            convo.say('Good choice!');
             convo.say('¿Where do you want to receive it?');
             convo.ask({
                 'text': 'Share location',
@@ -158,7 +158,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                                     "quantity":1,
                                     "price":1800,
                                     "currency":"EUR",
-                                    "image_url":"http://manekinekosushi.com/wp-content/uploads/2016/08/maki_29_-maki_mixto.jpg"
+                                    "image_url":"http://eurostonesa.com.ar/uploads/slideshow/dekton_1.jpg"
                                 }
                         ],
                         "address":{
