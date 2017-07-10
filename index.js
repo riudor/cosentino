@@ -62,7 +62,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
-controller.hears(['hola'], 'message_received', (bot, message) => {
+controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
         convo.say('Hi! I am Cossy, your Cosentino assistant');
         convo.say({
@@ -75,12 +75,22 @@ controller.hears(['hola'], 'message_received', (bot, message) => {
                         {
                             'type':'postback',
                             'title':'Buy a product',
-                            'payload':'ofertas'
+                            'payload':'buy'
                         },
                         {
                             'type':'postback',
                             'title':'See my profile',
-                            'payload':'locales'
+                            'payload':'profile'
+                        },
+                        {
+                            'type':'postback',
+                            'title':'Social cooking',
+                            'payload':'cook'
+                        },
+                        {
+                            'type':'postback',
+                            'title':'FAQ',
+                            'payload':'faq'
                         }
                     ]
                 }
@@ -94,7 +104,7 @@ controller.hears(['hola'], 'message_received', (bot, message) => {
     };
 });
 
-controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
+controller.hears(['buy', 'product'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
             convo.ask({
