@@ -86,6 +86,11 @@ controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
                             'type':'postback',
                             'title':'Purchase product',
                             'payload':'purchase'
+                        },
+                        {
+                            'type':'postback',
+                            'title':'FAQ',
+                            'payload':'faq'
                         }
                     ]
                 }
@@ -99,6 +104,13 @@ controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
     };
 });
 
+
+
+
+
+
+
+
 controller.hears(['products', 'product'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
@@ -111,17 +123,17 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                         'buttons':[
                             {
                                 'type':'postback',
-                                'title':'Oferta A: 12 Piezas por 8€',
+                                'title':'A: Silestone Marfil',
                                 'payload':'A'
                             },
                             {
                                 'type':'postback',
-                                'title':'Oferta B: 18 Piezas por 12€',
+                                'title':'B: Dekton Zeus',
                                 'payload':'B'
                             },
                             {
                                 'type':'postback',
-                                'title':'Oferta C: 24 Piezas por 18€',
+                                'title':'C: Sensa Cold',
                                 'payload':'C'
                             }
                         ]
@@ -133,9 +145,9 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                 convo.next();
             });
             convo.say('Muy buena elección!');
-            convo.say('¿Donde quieres que te lo enviemos?');
+            convo.say('¿Where do you want to receive the product?');
             convo.ask({
-                'text': 'Compartir ubicación',
+                'text': 'Share location',
                 'quick_replies': [
                     {
                         'content_type': 'location'
@@ -151,17 +163,17 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                     "type":"template",
                     "payload":{
                         "template_type":"receipt",
-                        "recipient_name":"Gabriel Esteban",
+                        "recipient_name":"David Riudor",
                         "order_number":"12345678902",
                         "currency":"EUR",
                         "payment_method":"Visa 2345",
                         "timestamp":"1428444852",
                         "elements":[
                                 {
-                                    "title":"Maki de 24 piezas",
-                                    "subtitle":"24 piezas surtidas de excelente calidad",
+                                    "title":"Silestone Countertop",
+                                    "subtitle":"The most awarded surface on the world",
                                     "quantity":1,
-                                    "price":18,
+                                    "price":1800,
                                     "currency":"EUR",
                                     "image_url":"http://static.cosentino.com/dektonmulti/theme/files/images/natural-coleccion/aura-kitchen.jpg"
                                 }
@@ -175,10 +187,10 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                             "country":"ES"
                         },
                         "summary":{
-                            "subtotal":21.6,
-                            "shipping_cost":2.95,
-                            "total_tax":2.4,
-                            "total_cost":26.95
+                            "subtotal":1800,
+                            "shipping_cost":75,
+                            "total_tax":378,
+                            "total_cost":2253
                         }
                     }
                 }
