@@ -384,7 +384,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 convo.next();
                 console.log(response.text);
                 if(response.text == "Buy"){
-                    convo.ask('What product do you want to Buy. (From the Bitcoin and with format type: ETH)?',function(response,convo){
+                    convo.ask('What product do you want to Buy. (Example: utop)?',function(response,convo){
                         console.log(response);
                         choosen = response.text;
                         //choosen = conversations[message.channel].message;
