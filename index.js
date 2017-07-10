@@ -62,35 +62,25 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
-controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
+controller.hears(['hola'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
-        convo.say('Hello, I am Cossy your Cosentino assistant.');
+        convo.say('Hola, somos instamaki.');
         convo.say({
             attachment: {
                 'type':'template',
                 'payload':{
                     'template_type':'button',
-                    'text':'¿How can we help you?',
+                    'text':'¿que podemos hacer por tí?',
                     'buttons':[
                         {
                             'type':'postback',
-                            'title':'See products',
-                            'payload':'products'
+                            'title':'Ver ofertas',
+                            'payload':'ofertas'
                         },
                         {
                             'type':'postback',
-                            'title':'My profile',
-                            'payload':'profile'
-                        },
-                        {
-                            'type':'postback',
-                            'title':'Purchase product',
-                            'payload':'purchase'
-                        },
-                        {
-                            'type':'postback',
-                            'title':'FAQ',
-                            'payload':'faq'
+                            'title':'Consultar locales',
+                            'payload':'locales'
                         }
                     ]
                 }
@@ -104,14 +94,7 @@ controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
     };
 });
 
-
-
-
-
-
-
-
-controller.hears(['products', 'product'], 'message_received', (bot, message) => {
+controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
             convo.ask({
@@ -123,17 +106,17 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                         'buttons':[
                             {
                                 'type':'postback',
-                                'title':'A: Silestone Marfil',
+                                'title':'Oferta A: 12 Piezas por 8€',
                                 'payload':'A'
                             },
                             {
                                 'type':'postback',
-                                'title':'B: Dekton Zeus',
+                                'title':'Oferta B: 18 Piezas por 12€',
                                 'payload':'B'
                             },
                             {
                                 'type':'postback',
-                                'title':'C: Sensa Cold',
+                                'title':'Oferta C: 24 Piezas por 18€',
                                 'payload':'C'
                             }
                         ]
@@ -145,9 +128,9 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                 convo.next();
             });
             convo.say('Muy buena elección!');
-            convo.say('¿Where do you want to receive the product?');
+            convo.say('¿Donde quieres que te lo enviemos?');
             convo.ask({
-                'text': 'Share location',
+                'text': 'Compartir ubicación',
                 'quick_replies': [
                     {
                         'content_type': 'location'
@@ -163,19 +146,19 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                     "type":"template",
                     "payload":{
                         "template_type":"receipt",
-                        "recipient_name":"David Riudor",
+                        "recipient_name":"Gabriel Esteban",
                         "order_number":"12345678902",
                         "currency":"EUR",
                         "payment_method":"Visa 2345",
                         "timestamp":"1428444852",
                         "elements":[
                                 {
-                                    "title":"Silestone Countertop",
-                                    "subtitle":"The most awarded surface on the world",
+                                    "title":"Maki de 24 piezas",
+                                    "subtitle":"24 piezas surtidas de excelente calidad",
                                     "quantity":1,
-                                    "price":1800,
+                                    "price":18,
                                     "currency":"EUR",
-                                    "image_url":"http://static.cosentino.com/dektonmulti/theme/files/images/natural-coleccion/aura-kitchen.jpg"
+                                    "image_url":"http://manekinekosushi.com/wp-content/uploads/2016/08/maki_29_-maki_mixto.jpg"
                                 }
                         ],
                         "address":{
@@ -187,10 +170,10 @@ controller.hears(['products', 'product'], 'message_received', (bot, message) => 
                             "country":"ES"
                         },
                         "summary":{
-                            "subtotal":1800,
-                            "shipping_cost":75,
-                            "total_tax":378,
-                            "total_cost":2253
+                            "subtotal":21.6,
+                            "shipping_cost":2.95,
+                            "total_tax":2.4,
+                            "total_cost":26.95
                         }
                     }
                 }
