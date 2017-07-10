@@ -64,7 +64,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 
 controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
-        convo.say('Hello, I am Cozy your Cosentino assistant.');
+        convo.say('Hello, I am Cossy your Cosentino assistant.');
         convo.say({
             attachment: {
                 'type':'template',
