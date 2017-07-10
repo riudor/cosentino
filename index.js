@@ -62,7 +62,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
-controller.hears(['hola'], 'message_received', (bot, message) => {
+controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
         convo.say('Hi! I am Cossy, your Cosentino assistant');
         convo.say({
@@ -154,7 +154,7 @@ controller.hears(['buy', 'product'], 'message_received', (bot, message) => {
                         "recipient_name":"David Riudor",
                         "order_number":"12345678902",
                         "currency":"EUR",
-                        "payment_method":"Visa 2345",
+                        "payment_method":"Cash",
                         "timestamp":"1428444852",
                         "elements":[
                                 {
@@ -183,6 +183,8 @@ controller.hears(['buy', 'product'], 'message_received', (bot, message) => {
                     }
                 }
             });
+              convo.say('You will receive a message when the product arrive to your location');
+              convo.say('See you soon!');
             conversations[message.channel].status = CONVERSATION_STATUS_PAGO;
         });
     }
