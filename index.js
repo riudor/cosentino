@@ -124,7 +124,7 @@ controller.on('message_received', (bot, message) => {
         flag = false ;
         //bot.reply(message,typing_on);
         bot.startConversation(message, (err, convo) => {
-            convo.say('Hey! I am Cossy your Cosentino assistant:)');
+            convo.say('Hey! I am Cozy your Cosentino assistant:)');
             //bot.reply(message2,typing_on);
             convo.say({
                 attachment: {
