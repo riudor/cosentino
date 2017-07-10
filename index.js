@@ -62,7 +62,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
-controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
+controller.hears(['hola'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
         convo.say('Hi! I am Cossy, your Cosentino assistant');
         convo.say({
