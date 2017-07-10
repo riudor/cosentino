@@ -62,7 +62,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
-controller.hears(['hola'], 'message_received', (bot, message) => {
+controller.hears(['hola','hello','hey'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
         convo.say('Hola, somos instamaki.');
         convo.say({
@@ -102,21 +102,21 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                     'type':'template',
                     'payload':{
                         'template_type':'button',
-                        'text':'Actualmente tenemos disponible las siguientes ofertas:',
+                        'text':'You can choose between these options:',
                         'buttons':[
                             {
                                 'type':'postback',
-                                'title':'Oferta A: 12 Piezas por 8€',
+                                'title':'A: Silestone Marfil',
                                 'payload':'A'
                             },
                             {
                                 'type':'postback',
-                                'title':'Oferta B: 18 Piezas por 12€',
+                                'title':'B: Dekton Zeus',
                                 'payload':'B'
                             },
                             {
                                 'type':'postback',
-                                'title':'Oferta C: 24 Piezas por 18€',
+                                'title':'C: Sensa Cold,
                                 'payload':'C'
                             }
                         ]
@@ -127,10 +127,10 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                 conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
                 convo.next();
             });
-            convo.say('Muy buena elección!');
-            convo.say('¿Donde quieres que te lo enviemos?');
+            convo.say('Good choice!');
+            convo.say('¿Where do you want to receive it?');
             convo.ask({
-                'text': 'Compartir ubicación',
+                'text': 'Share location',
                 'quick_replies': [
                     {
                         'content_type': 'location'
@@ -146,19 +146,19 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                     "type":"template",
                     "payload":{
                         "template_type":"receipt",
-                        "recipient_name":"Gabriel Esteban",
+                        "recipient_name":"David Riudor",
                         "order_number":"12345678902",
                         "currency":"EUR",
                         "payment_method":"Visa 2345",
                         "timestamp":"1428444852",
                         "elements":[
                                 {
-                                    "title":"Maki de 24 piezas",
-                                    "subtitle":"24 piezas surtidas de excelente calidad",
+                                    "title":"Silestone Marfil",
+                                    "subtitle":"The most awarded countertop",
                                     "quantity":1,
-                                    "price":18,
+                                    "price":1800,
                                     "currency":"EUR",
-                                    "image_url":"http://manekinekosushi.com/wp-content/uploads/2016/08/maki_29_-maki_mixto.jpg"
+                                    "image_url":"http://eurostonesa.com.ar/uploads/slideshow/dekton_1.jpg"
                                 }
                         ],
                         "address":{
@@ -170,10 +170,10 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                             "country":"ES"
                         },
                         "summary":{
-                            "subtotal":21.6,
-                            "shipping_cost":2.95,
-                            "total_tax":2.4,
-                            "total_cost":26.95
+                            "subtotal":1800,
+                            "shipping_cost":75,
+                            "total_tax":375,
+                            "total_cost":2260
                         }
                     }
                 }
