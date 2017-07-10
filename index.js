@@ -227,13 +227,13 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
             convo.say('Today it has been an incredible day!');
 
-            //request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
-             // if(error){
+            request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
+              if(error){
                // convo.say('internal error ocurred:S');
-           // }
-           // else{
+            }
+            else{
             
-            /*
+
                 let json = JSON.parse(body);
                 convo.say('You have:');
                 //console.log(body[0].amount);
@@ -242,20 +242,19 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
                 convo.say( json[2].amount + ' ' + json[2].currency + ' (-2%)');
                 convo.say( json[3].amount + ' ' + json[3].currency + ' (+11%)');
 
-*/
 
 
-             //   request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
-              //      let json3 = JSON.parse(body);
-               //     request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
-               //         let json4 = JSON.parse(body);
-               //         request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
+                request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+                    let json3 = JSON.parse(body);
+                    request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
+                        let json4 = JSON.parse(body);
+                        request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
 
-                  //          let json2 = JSON.parse(body);
-                 //           let btc_xmr= json2.last;
-                 //           let btc_eth= json4.last;
-                 //           let btc_euro= json3.last;
-                  //          total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
+                            let json2 = JSON.parse(body);
+                            let btc_xmr= json2.last;
+                            let btc_eth= json4.last;
+                            let btc_euro= json3.last;
+                            total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
                             convo.say('Total worth of your portfolio: ' + total + ' EUR');
                             convo.say('Do you want to do more actions?');
             
@@ -263,12 +262,12 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
                             convo.say('You have eaten 4K calories');
                             convo.say('Lisa has liked your new recipe');
                             conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
-           //             });
-           //         });                    
-          //      });
+                        });
+                    });                    
+                });
 
 
-        //    }
+            }
         });
 
 
