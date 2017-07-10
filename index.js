@@ -84,11 +84,6 @@ controller.hears(['hola'], 'message_received', (bot, message) => {
                         },
                         {
                             'type':'postback',
-                            'title':'Social cooking',
-                            'payload':'cook'
-                        },
-                        {
-                            'type':'postback',
                             'title':'FAQ',
                             'payload':'faq'
                         }
