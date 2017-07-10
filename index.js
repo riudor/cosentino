@@ -124,7 +124,7 @@ controller.on('message_received', (bot, message) => {
         flag = false ;
         //bot.reply(message,typing_on);
         bot.startConversation(message, (err, convo) => {
-            convo.say('Hey! I am Cozy your Cosentino assistant:)');
+            convo.say('Hey! I am Cossy your Cosentino assistant:)');
             //bot.reply(message2,typing_on);
             convo.say({
                 attachment: {
@@ -227,11 +227,13 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
             convo.say('Today it has been an incredible day!');
 
-            request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
-              if(error){
-                convo.say('internal error ocurred:S');
-            }
-            else{
+            //request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
+             // if(error){
+               // convo.say('internal error ocurred:S');
+           // }
+           // else{
+            
+            /*
                 let json = JSON.parse(body);
                 convo.say('You have:');
                 //console.log(body[0].amount);
@@ -240,29 +242,33 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
                 convo.say( json[2].amount + ' ' + json[2].currency + ' (-2%)');
                 convo.say( json[3].amount + ' ' + json[3].currency + ' (+11%)');
 
+*/
 
 
+             //   request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+              //      let json3 = JSON.parse(body);
+               //     request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
+               //         let json4 = JSON.parse(body);
+               //         request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
 
-                request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
-                    let json3 = JSON.parse(body);
-                    request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
-                        let json4 = JSON.parse(body);
-                        request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
-
-                            let json2 = JSON.parse(body);
-                            let btc_xmr= json2.last;
-                            let btc_eth= json4.last;
-                            let btc_euro= json3.last;
-                            total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
+                  //          let json2 = JSON.parse(body);
+                 //           let btc_xmr= json2.last;
+                 //           let btc_eth= json4.last;
+                 //           let btc_euro= json3.last;
+                  //          total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
                             convo.say('Total worth of your portfolio: ' + total + ' EUR');
                             convo.say('Do you want to do more actions?');
+            
+                            convo.say('You have cooked 2 times');
+                            convo.say('You have eaten 4K calories');
+                            convo.say('Lisa has liked your new recipe');
                             conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
-                        });
-                    });                    
-                });
+           //             });
+           //         });                    
+          //      });
 
 
-            }
+        //    }
         });
 
 
@@ -276,7 +282,7 @@ controller.hears(['product'], 'message_received', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
 
             convo.say('What product do you want to see ?');
-            convo.ask('Say the name of the crypto: f.i eth:',[
+            convo.ask('Say the name of the product: f.i eth:',[
             {
                 pattern: 'eth',
                 callback: function(response,convo) {
@@ -379,11 +385,11 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 convo.next();
                 console.log(response.text);
                 if(response.text == "Buy"){
-                    convo.ask('What Crypto do you want to Buy. (From the Bitcoin and with format type: ETH)?',function(response,convo){
+                    convo.ask('What product do you want to Buy. (From the Bitcoin and with format type: ETH)?',function(response,convo){
                         console.log(response);
                         choosen = response.text;
                         //choosen = conversations[message.channel].message;
-                        convo.say('Good choice. Now you have it in your wallet');
+                        convo.say('Good choice. Now you have it in your account');
                         convo.next();
                     });
                     convo.ask('How many units?',function(response,convo){
