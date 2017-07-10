@@ -124,7 +124,7 @@ controller.on('message_received', (bot, message) => {
         flag = false ;
         //bot.reply(message,typing_on);
         bot.startConversation(message, (err, convo) => {
-            convo.say('Hey! I am Deskie your cryptotrading assistant:)');
+            convo.say('Hey! I am Cozy your Cosentino assistant:)');
             //bot.reply(message2,typing_on);
             convo.say({
                 attachment: {
@@ -196,8 +196,8 @@ controller.hears(['more'], 'message_received', (bot, message) => {
                         },
                         {
                             'type':'postback',
-                            'title':'See a crypto',
-                            'payload':'crypto'
+                            'title':'See a product',
+                            'payload':'product'
                             }/*,
                             {
                                 'type':'postback',
@@ -271,11 +271,11 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 });
 
 
-controller.hears(['crypto'], 'message_received', (bot, message) => {
+controller.hears(['product'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
         bot.startConversation(message, (err, convo) => {
 
-            convo.say('What crypto do you want to see ?');
+            convo.say('What product do you want to see ?');
             convo.ask('Say the name of the crypto: f.i eth:',[
             {
                 pattern: 'eth',
